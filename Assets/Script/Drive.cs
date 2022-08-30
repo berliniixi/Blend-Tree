@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Drive : MonoBehaviour {
 
-    float speed = 5.0f;
-    float rotationSpeed = 100.0f;
+    [SerializeField] float speed = 5.0f;
+    [SerializeField] float rotationSpeed = 100.0f;
+    [SerializeField] private float currentSpeed = 0f;
     Animator anim;
 
     void Start() {
@@ -21,6 +22,8 @@ public class Drive : MonoBehaviour {
         translation *= Time.deltaTime;
         rotation *= Time.deltaTime;
 
+        currentSpeed += translation;
+        anim.SetFloat("Speed" , currentSpeed);
         transform.Rotate(0.0f, rotation, 0.0f);
 
         if(translation != 0) {
